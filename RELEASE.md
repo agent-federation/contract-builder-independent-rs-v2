@@ -1,6 +1,6 @@
 # PAP Phase 2a experimental — Rust release
 
-- crate: `pap-verifier` `0.1.0-alpha.2`; binary `pap`
+- crate: `pap-verifier` `0.1.0-alpha.3`; binary `pap`
 - experiment: `PAP-RS-P2A-003` (glm-5.3-flash); Gate 3 result commit: `0b31dac`
 - scope: Phase 2a only; not full PAP/Tier B conformance
 - license: MIT
