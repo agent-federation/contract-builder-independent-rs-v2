@@ -1,9 +1,14 @@
 [package]
 name = "pap-verifier"
-version = "0.1.0"
+version = "0.1.0-alpha.2"
 edition = "2021"
 description = "Independent Phase 2a verifier for Portable Assurance Package (PAP) v0.1"
-license = "Apache-2.0"
+readme = "README.md"
+license = "MIT"
+repository = "https://github.com/agent-federation/contract-builder-independent-rs-v2"
+keywords = ["pap", "assurance", "verification", "phase2a"]
+categories = ["development-tools", "parsing"]
+exclude = ["pap/fixtures", "pap/schemas", "snapshot", "docs", "AGENT_BRIEF.md"]
 
 [lib]
 name = "pap"
