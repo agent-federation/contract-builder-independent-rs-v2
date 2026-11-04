@@ -4,6 +4,10 @@ on:
   release:
     types: [published]
   workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to build/publish"
+        required: true
 
 permissions:
   contents: write
@@ -15,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
-          ref: ${{ github.event.release.tag_name || github.ref }}
+          ref: ${{ github.event.release.tag_name || github.event.inputs.tag }}
       - uses: dtolnay/rust-toolchain@b725eda525362e7cf34af9a7243cac1e3f01a7ec # stable
       - name: Test
         run: cargo test --all-targets
@@ -35,7 +39,7 @@ jobs:
           path: dist/*
 
   publish-assets:
-    if: github.event_name == 'release'
+    if: github.event_name == 'release' || github.event.inputs.tag != ''
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -46,20 +50,20 @@ jobs:
       - name: Attach assets
         env:
           GH_TOKEN: ${{ github.token }}
-          TAG: ${{ github.event.release.tag_name }}
+          TAG: ${{ github.event.release.tag_name || github.event.inputs.tag }}
         run: gh release upload "$TAG" dist/* --repo "$GITHUB_REPOSITORY" --clobber
 
   publish-crates:
     # First publish was manual; enable after crates.io trusted publishing is configured
     # and the repository variable CRATES_PUBLISH is set to "true".
-    if: github.event_name == 'release' && vars.CRATES_PUBLISH == 'true'
+    if: (github.event_name == 'release' || github.event.inputs.tag != '') && vars.CRATES_PUBLISH == 'true'
     needs: build
     runs-on: ubuntu-latest
     environment: release
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
-          ref: ${{ github.event.release.tag_name }}
+          ref: ${{ github.event.release.tag_name || github.event.inputs.tag }}
       - uses: dtolnay/rust-toolchain@b725eda525362e7cf34af9a7243cac1e3f01a7ec # stable
       - uses: rust-lang/crates-io-auth-action@3268eb413133e2960fa4ae0e963ca76380c54cd9 # v1
         id: auth
