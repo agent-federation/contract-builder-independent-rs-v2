@@ -31,5 +31,6 @@
 ## Blocked by ambiguity
 - None recorded beyond ambiguity register.
 
-## Final commit SHA
-- To be recorded after commit.
+## Final implementation commit
+- Implementation commit: `2c2212d7773267bc3a7a75e0d9bd367610cdf723`
+- The documentation commit SHA is recorded in the experiment record (self-referential SHA avoided).
