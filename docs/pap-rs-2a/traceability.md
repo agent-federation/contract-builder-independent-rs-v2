@@ -35,7 +35,7 @@ Phase 2a; **BA** = blocked by a recorded specification ambiguity (see
 | requiredFeatures parsing (§4.9) | `src/manifest.rs` | IT | corpus F33; `tests/manifest_tests.rs::extension_and_required_feature_parsing` |
 | Compatibility: minor-newer / version-unsupported (§4.9, §15.1) | `src/manifest.rs` stage 5 | IT | corpus F10/F57; `tests/manifest_tests.rs::version_incompatibilities` |
 | JCS canonicalization incl. UTF-16 key order, escaping, numbers (§5.3.1) | `src/jcs.rs` | IT | E.1 bytes byte-for-byte + `tests/vectors.rs` E.9 |
-| H(domain‖0x00‖bytes) domain separation (§5.2) | `src/digest.rs::h` | IT | E.6 vectors |
+| H(domain || 0x00 || bytes) domain separation (§5.2) | `src/digest.rs::h` | IT | E.6 vectors |
 | Framing records u32be (§5.2) | `src/digest.rs::push_record` | IT | E.6 framing-ambiguity vectors |
 | SHA-256 | `src/sha256.rs` | IT | NIST vectors + all E digests |
 | Raw-source digest / LF normalization + binary fallback (§5.5, §5.6, §4.5.1) | `src/normalize.rs` | IT | E.5 vectors; `tests/safety.rs::normalized_input_digest_mismatch_*` |
