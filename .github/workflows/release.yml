@@ -50,7 +50,9 @@ jobs:
         run: gh release upload "$TAG" dist/* --repo "$GITHUB_REPOSITORY" --clobber
 
   publish-crates:
-    if: github.event_name == 'release'
+    # First publish was manual; enable after crates.io trusted publishing is configured
+    # and the repository variable CRATES_PUBLISH is set to "true".
+    if: github.event_name == 'release' && vars.CRATES_PUBLISH == 'true'
     needs: build
     runs-on: ubuntu-latest
     environment: release
