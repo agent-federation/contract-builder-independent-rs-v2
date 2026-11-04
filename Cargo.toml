@@ -1,0 +1,21 @@
+[package]
+name = "pap-verifier"
+version = "0.1.0"
+edition = "2021"
+description = "Independent Phase 2a verifier for Portable Assurance Package (PAP) v0.1"
+license = "Apache-2.0"
+
+[lib]
+name = "pap"
+path = "src/lib.rs"
+
+[[bin]]
+name = "pap"
+path = "src/main.rs"
+
+[dependencies]
+# Intentionally empty: pure Rust std implementation. The nested dependency
+# closure of the checker identity is therefore empty by construction.
+
+[profile.release]
+# Reproducible-friendly release profile (content digests only, no env data).

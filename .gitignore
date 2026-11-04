@@ -16,3 +16,6 @@ dist/
 htmlcov/
 /target
 /tools
+
+# cargo home used by the experiment sandbox
+/.cargo/
